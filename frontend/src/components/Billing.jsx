@@ -139,7 +139,8 @@ const ProductionStatus = ({ selectedOrganization, userdata, isCloud, theme }) =>
         const sub = selectedOrganization.subscriptions[0];
         const name = sub?.name?.toLowerCase() || "";
         isProdStatusOn = (name.includes("enterprise") || name.includes("business") || name.includes("air gapped")) && sub.active;
-    }   
+    }
+    isProdStatusOn = true   
     const themeMode = theme.palette.mode;
     const accent = theme.palette.primary.main;
     const cardBg = theme.palette.platformColor;

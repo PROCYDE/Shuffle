@@ -1177,6 +1177,7 @@ const Workflows2 = (props) => {
                 } else {
                   setIsProdStatusOn(false);
                 }
+                setIsProdStatusOn(true)
               }
           }
         })

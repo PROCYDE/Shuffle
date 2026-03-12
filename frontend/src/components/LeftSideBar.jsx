@@ -1009,6 +1009,7 @@ const LeftSideBar = ({ userdata, serverside, globalUrl, notifications, SHUFFLE_V
                 setIsProdStatusOn(false);
               }
             }
+            setIsProdStatusOn(true)
         }
       })
       .catch(() => {});

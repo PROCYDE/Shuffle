@@ -237,6 +237,7 @@ const NewDashboard = (props) => {
                 setIsProdStatusOn(false);
               }
             }
+            setIsProdStatusOn(true)
         }
       })
       .catch(() => {});
