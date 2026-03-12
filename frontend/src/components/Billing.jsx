@@ -80,6 +80,7 @@ const ProductionStatus = ({ selectedOrganization, userdata, isCloud, theme }) =>
     } else {
         isProdStatusOn = false;
     }
+	isProdStatusOn = true
 
     const themeMode = theme.palette.mode;
 	const workflowActive = selectedOrganization?.sync_features?.app_executions?.active;
