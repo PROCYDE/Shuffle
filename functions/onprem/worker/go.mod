@@ -5,6 +5,8 @@ go 1.25.0
 //replace github.com/shuffle/shuffle-shared => ../../../../shuffle-shared
 //replace github.com/shuffle/singul => ../../../../singul
 
+replace github.com/shuffle/shuffle-shared => github.com/PROCYDE/shuffle-shared v0.0.0-20260623075503-e64ad35c6a88
+
 require (
 	github.com/docker/docker v28.3.3+incompatible
 	github.com/gorilla/mux v1.8.1
