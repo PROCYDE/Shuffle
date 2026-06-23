@@ -933,15 +933,15 @@ func deleteWorkflow(resp http.ResponseWriter, request *http.Request) {
 			//	log.Printf("Failed to delete webhook: %s", err)
 			//}
 		} else if item.TriggerType == "EMAIL" {
-		//	err = shuffle.HandleOutlookSubRemoval(ctx, user, workflow.ID, item.ID)
-		//	if err != nil {
-		//		log.Printf("[DEBUG] Failed to delete OUTLOOK email sub (checking gmail after): %s", err)
-		//	}
+			//	err = shuffle.HandleOutlookSubRemoval(ctx, user, workflow.ID, item.ID)
+			//	if err != nil {
+			//		log.Printf("[DEBUG] Failed to delete OUTLOOK email sub (checking gmail after): %s", err)
+			//	}
 
-		//	err = shuffle.HandleGmailSubRemoval(ctx, user, workflow.ID, item.ID)
-		//	if err != nil {
-		//		log.Printf("Failed to delete gmail email sub: %s", err)
-		//	}
+			//	err = shuffle.HandleGmailSubRemoval(ctx, user, workflow.ID, item.ID)
+			//	if err != nil {
+			//		log.Printf("Failed to delete gmail email sub: %s", err)
+			//	}
 		}
 	}
 
@@ -3471,7 +3471,7 @@ func LoadSpecificApps(resp http.ResponseWriter, request *http.Request) {
 		}
 
 		IterateAppGithubFolders(ctx, fs, dir, "", "", tmpBody.ForceUpdate, false)
-		iterateOpenApiGithub(fs, dir, "", "") 
+		iterateOpenApiGithub(fs, dir, "", "")
 
 	} else if strings.Contains(tmpBody.URL, "s3") {
 		//https://docs.aws.amazon.com/sdk-for-go/api/service/s3/
