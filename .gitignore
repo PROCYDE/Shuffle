@@ -1,6 +1,5 @@
 *node_modules/
 *build/
-*.lock
 *.swo
 *.swp
 *.swn
@@ -29,7 +28,11 @@ shuffle-database/nodes
 shuffle-database/performance_analyzer_enabled.conf
 shuffle-database/rca_enabled.conf
 
-#*/package-lock.json
+# Helm
+Chart.lock
+
+# Built go binaries
+shuffle
 
 # Devenv
 .devenv*
@@ -41,7 +44,3 @@ devenv.local.yaml
 
 # pre-commit
 .pre-commit-config.yaml
-
-# Built Go binary
-/shuffle
-backend/go-app/shuffle
