@@ -35,6 +35,8 @@ services:
       #- DOCKER_HOST=tcp://docker-socket-proxy:2375
       - SHUFFLE_APP_HOTLOAD_FOLDER=/shuffle-apps
       - SHUFFLE_FILE_LOCATION=/shuffle-files
+      - SHUFFLE_SESSION_IDLE_TIMEOUT=${SHUFFLE_SESSION_IDLE_TIMEOUT:-3600}
+      - SHUFFLE_SESSION_MAX_LIFETIME=${SHUFFLE_SESSION_MAX_LIFETIME}
     restart: unless-stopped
   orborus:
     build:
@@ -63,7 +65,9 @@ services:
       - CLEANUP=false
       - SHUFFLE_WORKER_IMAGE=registry.procyde.online/library/shuffle/worker:latest
       - SHUFFLE_BASE_IMAGE_REGISTRY=registry.procyde.online
-      - SHUFFLE_BASE_IMAGE_NAME=library/shuffle/apps
+      - SHUFFLE_BASE_IMAGE_NAME=library/shuffle
+      - SHUFFLE_SESSION_IDLE_TIMEOUT=${SHUFFLE_SESSION_IDLE_TIMEOUT:-3600}
+      - SHUFFLE_SESSION_MAX_LIFETIME=${SHUFFLE_SESSION_MAX_LIFETIME}
     env_file: .env
     restart: unless-stopped
     security_opt:
