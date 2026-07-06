@@ -22,7 +22,8 @@ backend/onprem/app_sdk/apps
 *debug*
 !**/RuntimeDebugger.jsx
 
-shuffle-database
+shuffle-database/*
+!shuffle-database/.gitkeep
 
 # Helm
 Chart.lock
