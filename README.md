@@ -1,140 +1,159 @@
-<h1 align="center">
+# PROCYDE Shuffle Fork
 
-[![Shuffle Logo](https://github.com/Shuffle/Shuffle/blob/main/frontend/public/images/Shuffle_logo_new.png)](https://shuffler.io)
+This is a fork of [Shuffle](https://github.com/shuffle/Shuffle) managed by PROCYDE.
+It is used for PROCYDE-internal Shuffle deployments and as a base for upstream pull requests.
 
-Shuffle Automation
+## FAQ
 
-</h1><h4 align="center">
-  
-  <p>Deploy On<p/>
-<p align="center">
-  <a href="https://console.cloud.google.com/marketplace/product/shuffle-public/shuffle">
-    <img src="https://github.com/user-attachments/assets/37858273-eaeb-42a9-b228-a425026ca82d"
-         height="80"/>
-  </a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://aws.amazon.com/marketplace/pp/prodview-typ7upg6kwntk">
-    <img src="https://github.com/user-attachments/assets/250e00d7-2a23-4b4e-95e1-5db4db1f7864"
-         height="80"/>
-  </a>
-</p>
+### Can I contribute to this fork?
 
+No. This fork is for PROCYDE-internal usage only. Please contribute to the upstream [Shuffle](https://github.com/shuffle/Shuffle) repository instead.
 
+### Can you host or manage Shuffle for us?
 
-[Shuffle](https://shuffler.io) is an open source automation platform, built for and by the security professionals. Security operations is complex, but it doesn't have to be. Built to work well with MSSP's and other service providers in mind.
+No. Check out [Shuffle Cloud](https://shuffler.io) for managed Shuffle.
 
-[ Get training ](https://shuffler.io/training)
-[_Key Features_](https://shuffler.io/docs/features) —
-[_Community & Support_](https://discord.gg/B2CBzUm) —
-[ Get training ](https://shuffler.io/training) -
-[_Documentation_](https://shuffler.io/docs) —
-[_Getting Started_](https://shuffler.io/docs/getting_started) —
-[_Development_](https://github.com/shuffle/Shuffle/blob/master/.github/CONTRIBUTING.md) 
-[ Set up a demo call ](https://shuffler.io/contact)
+## What's different from upstream
 
-Follow us on Twitter at [@shuffleio](https://twitter.com/shuffleio).
+The upstream [Shuffle](https://github.com/shuffle/Shuffle) project spans several repositories (`Shuffle`, `shuffle-shared`, `shuffle-apps`, `orborus`, etc.). This fork brings them together:
 
+- `shuffle-shared/` — included as a **git submodule** pointing to [PROCYDE/shuffle-shared](https://github.com/PROCYDE/shuffle-shared)
+- `orborus/` — included as a **git submodule** pointing to [PROCYDE/shuffle-orborus](https://github.com/PROCYDE/shuffle-orborus)
 
-</h4>
+A `devenv` and `go.work` is provided for easier development.
 
-![Example Shuffle webhook integration](https://github.com/shuffle/Shuffle/blob/main/frontend/src/assets/img/github_shuffle_img.png)
+## Local development setup
 
-## Try it
-* Self-hosted: Check out the [installation guide](https://github.com/shuffle/shuffle/blob/master/.github/install-guide.md)
-* Cloud: Register at https://shuffler.io/register and get cooking
+### Prerequisites
 
-Please consider [sponsoring](https://github.com/sponsors/frikky) the project if you want to see more rapid development.
+- Nix
+- Devenv
+- Docker
 
-## Support
-* [Discord](https://discord.gg/B2CBzUm)
-* [Twitter](https://twitter.com/shuffleio)
-* [Email](mailto:frikky@shuffler.io)
-* [Open issue](https://github.com/shuffle/Shuffle/issues/new)
-* [Shuffler.io](https://shuffler.io/contact)
+### Clone
 
-## Blogposts
-* [1. Introducing Shuffle](https://medium.com/security-operation-capybara/introducing-shuffle-an-open-source-soar-platform-part-1-58a529de7d12)
-* [2. Getting started with Shuffle](https://medium.com/security-operation-capybara/getting-started-with-shuffle-an-open-source-soar-platform-part-2-1d7c67a64244)
-* [3. Integrating Shuffle with Virustotal and TheHive](https://medium.com/@Frikkylikeme/integrating-shuffle-with-virustotal-and-thehive-open-source-soar-part-3-8e2e0d3396a9)
-* [4. Real-time executions with TheHive, Cortex and MISP](https://medium.com/@Frikkylikeme/indicators-and-webhooks-with-thehive-cortex-and-misp-open-source-soar-part-4-f70cde942e59)
-
-## Documentation
-[Documentation](https://shuffler.io/docs) can be found on [https://shuffler.io/docs](https://shuffler.io/docs) and is written here: [https://github.com/shuffle/shuffle-docs](https://github.com/shuffle/shuffle-docs).
-
-### Setting up a local development environment
-
-Please follow the steps mentioned [here](https://github.com/Shuffle/Shuffle/blob/main/.github/install-guide.md#local-development-installation)!
-
-## Related repositories
-* OpenAPI apps: [https://github.com/shuffle/security-openapis](https://github.com/shuffle/security-openapis)
-* Documentation: [https://github.com/shuffle/shuffle-docs](https://github.com/shuffle/shuffle-docs)
-* Workflows: [https://github.com/shuffle/shuffle-workflows](https://github.com/shuffle/shuffle-workflows)
-* Python apps: [https://github.com/shuffle/shuffle-apps](https://github.com/shuffle/python-apps)
-
-## Features
-* Simple, feature rich [workflow editor](https://shuffler.io/docs/workflows)
-* App creator using [OpenAPI](https://github.com/shuffle/OpenAPI-security-definitions)
-* Premade apps for your security tools
-* Organization and sub-organization control
-* Hybrid resource sharing with shuffler.io (optional)
-
-## Website
-[https://shuffler.io](https://shuffler.io)
-
-## Contributing
-We want to make the world of cybersecurity more accessible and need all the help we can get. Send an email to [support@shuffler](mailto:support@shuffler.io) and we'll make sure to give you any training you may need.
-
-These are the main areas to contribute in:
-* Frontend (ReactJS)
-* Backend (Golang)
-* App Creation (Python & GUI w/OpenAPI)
-* Documentation (Markdown)
-* Workflow creation (GUI & Conceptualizing) 
-* Content Creation (Blogs, videos etc) 
-
-Contributing guidelines are outlined [here](https://github.com/shuffle/Shuffle/blob/master/.github/CONTRIBUTING.md).
-
-## Contributors 
-![ICPL logo](https://github.com/Shuffle/Shuffle/blob/main/frontend/src/assets/img/icpl_logo.png)
-
-**Shuffle**
-<a href="https://github.com/shuffle/shuffle/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=shuffle/shuffle" />
-</a>
-
-[**App magicians**](https://github.com/shuffle/shuffle-apps)
-<a href="https://github.com/shuffle/shuffle-apps/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=shuffle/shuffle-apps" />
-</a>
-
-
-## License
-All modular information related to Shuffle will be under MIT (anyone can use it for whatever purpose), with Shuffle itself using AGPLv3. 
-
-Workflows: MIT
-Documentation: MIT
-Shuffle backend: AGPLv3 
-Apps, specification and App SDK: MIT
-
-## Architecture
-![Shuffle Architecture](https://github.com/shuffle/Shuffle/blob/main/frontend/src/assets/img/shuffle_architecture.png)
-
-## Security Contributors: Hall of Fame
-[Pushpraj](https://github.com/PushprajPatil) - Reported several issues between July and August 2024
-
-### Repository overview 
-Below is the folder structure with a short explanation
 ```bash
-├── README.md				# What you're reading right now
-├── backend					# Contains backend related code.
-│   ├── go-app 			# The backend golang webserver
-│   └── app_sdk			# The SDK used for apps
-├── frontend				# Contains frontend code. ReactJS, Material UI and cytoscape
-├── functions				# Has execution and extension resources, such as the Wazuh integration
-│   ├── onprem				# Code for onprem solutions
-│   │   ├── Orborus 	# Distributes execution locations
-│   │   ├── Worker		# Runs a workflow
-└ docker-compose.yml 	# Used for deployments
+git clone --recurse-submodules git@github.com:PROCYDE/Shuffle.git
+cd shuffle
 ```
 
-[Get in touch](https://shuffler.io/contact), send a mail to [frikky@shuffler.io](mailto:frikky@shuffler.io) or poke me on twitter [@frikkylikeme](https://twitter.com/frikkylikeme)
+If you already cloned without `--recurse-submodules`, initialize the submodule:
+
+```bash
+git submodule update --init
+```
+
+### Go workspace
+
+This repo includes a `go.work` file at the root. This means Go resolves `import "github.com/shuffle/shuffle-shared"` from the local `shuffle-shared/` directory — no manual `replace` edits needed.
+
+### Running locally
+
+**Infrastructure** (Opensearch):
+
+```bash
+docker compose up -d opensearch
+```
+
+**Backend:**
+
+```bash
+go run ./backend/go-app
+```
+
+The backend listens on port `5001` by default.
+
+**Frontend:**
+
+```bash
+cd frontend
+npm install --legacy-peer-deps
+npm run dev
+```
+
+The Vite dev server runs on port `3000` and proxies `/api` requests to `http://localhost:5001`.
+
+Open `http://localhost:3000` in a browser.
+
+## Making changes to shuffle-shared
+
+The `shuffle-shared/` directory is a git submodule pointing to [PROCYDE/shuffle-shared](https://github.com/PROCYDE/shuffle-shared). When you make changes inside it:
+
+```bash
+cd shuffle-shared
+
+# Check out a branch (you're in detached HEAD by default)
+git checkout -b my-feature
+
+# Make changes, commit, and push to the PROCYDE fork
+git push procyde HEAD:my-feature
+
+# Create a pull request on github.com/PROCYDE/shuffle-shared
+
+# When the PR merges, update the submodule reference in the main repo
+cd ..
+git add shuffle-shared
+git commit -m "bump shuffle-shared to include <feature>"
+```
+
+After pushing changes to the PROCYDE fork, update `backend/go-app/go.mod` to reference the new commit if you want Docker/CI builds to pick them up:
+
+```bash
+cd backend/go-app
+go mod tidy
+```
+
+### Adding upstream remote for contributions
+
+When you want to contribute changes back to the upstream `shuffle/shuffle-shared` repository, add it as a remote inside the submodule:
+
+```bash
+cd shuffle-shared
+git remote add upstream https://github.com/shuffle/shuffle-shared.git
+
+# Push your feature branch to your fork
+git push procyde HEAD:my-feature
+
+# Open a pull request from PROCYDE/shuffle-shared:my-feature → upstream shuffle/shuffle-shared:main
+```
+
+## Merging upstream changes
+
+### Main repo (PROCYDE/Shuffle)
+
+Sync with upstream `Shuffle/Shuffle`:
+
+```bash
+git fetch upstream
+git merge upstream/main   # or upstream/nightly
+```
+
+Resolve any conflicts and commit.
+
+### Submodule (shuffle-shared)
+
+Update the submodule to the latest upstream `shuffle-shared`:
+
+```bash
+cd shuffle-shared
+
+# Fetch from PROCYDE fork and upstream
+git fetch --all
+
+# Merge upstream changes into the PROCYDE main branch
+git checkout main
+git merge upstream/main
+git push procyde main
+
+cd ..
+git add shuffle-shared
+git commit -m "sync shuffle-shared with upstream"
+```
+
+## Upstream links
+
+- [Shuffle](https://github.com/shuffle/Shuffle) — main upstream repository
+- [shuffle-shared](https://github.com/shuffle/shuffle-shared) — Go shared library
+- [orborus](https://github.com/shuffle/orborus) — workflow execution distribution
+- [python-apps](https://github.com/shuffle/python-apps) — app definitions
+- [Documentation](https://shuffler.io/docs)
