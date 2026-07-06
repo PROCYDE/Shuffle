@@ -17,6 +17,9 @@
   languages.go.package = pkgs.go;
   languages.go.lsp.enable = true;
   languages.go.lsp.package = pkgs.gopls;
+  languages.javascript.enable = true;
+  languages.javascript.nodejs.enable = true;
+  languages.javascript.npm.enable = true;
 
   # https://devenv.sh/integrations/treefmt/
   treefmt = {
