@@ -1,6 +1,8 @@
 services:
   frontend:
-    image: ghcr.io/shuffle/shuffle-frontend:latest
+    build:
+      context: ./frontend
+    image: registry.procyde.online/library/shuffle/frontend:latest
     container_name: shuffle-frontend
     hostname: shuffle-frontend
     ports:
@@ -14,7 +16,9 @@ services:
     depends_on:
       - backend
   backend:
-    image: ghcr.io/shuffle/shuffle-backend:latest
+    build:
+      context: ./backend
+    image: registry.procyde.online/library/shuffle/backend:latest
     container_name: shuffle-backend
     hostname: ${BACKEND_HOSTNAME}
     # Here for debugging:
@@ -33,7 +37,9 @@ services:
       - SHUFFLE_FILE_LOCATION=/shuffle-files
     restart: unless-stopped
   orborus:
-    image: ghcr.io/shuffle/shuffle-orborus:latest
+    build:
+      context: ./orborus
+    image: registry.procyde.online/library/shuffle/orborus:latest
     container_name: shuffle-orborus
     hostname: shuffle-orborus
     networks:
@@ -55,11 +61,15 @@ services:
       - SHUFFLE_LOGS_DISABLED=true
       - SHUFFLE_SWARM_CONFIG=run
       - CLEANUP=false
-      - SHUFFLE_WORKER_IMAGE=ghcr.io/shuffle/shuffle-worker:latest
+      - SHUFFLE_WORKER_IMAGE=registry.procyde.online/library/shuffle/worker:latest
+      - SHUFFLE_BASE_IMAGE_REGISTRY=registry.procyde.online
+      - SHUFFLE_BASE_IMAGE_NAME=library/shuffle/apps
     env_file: .env
     restart: unless-stopped
     security_opt:
       - seccomp:unconfined
+    depends_on:
+      - backend
   opensearch:
     image: opensearchproject/opensearch:3.2.0
     hostname: shuffle-opensearch

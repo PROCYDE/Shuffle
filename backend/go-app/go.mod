@@ -2,13 +2,6 @@ module shuffle
 
 go 1.26.0
 
-//replace github.com/shuffle/shuffle-shared => ../../../shuffle-shared
-
-//replace github.com/frikky/schemaless => ../../../schemaless
-
-//replace github.com/frikky/kin-openapi => ../../../../git/kin-openapi
-//replace github.com/shuffle/opensearch-go => ../../../opensearch-go
-
 replace github.com/shuffle/shuffle-shared => github.com/PROCYDE/shuffle-shared v0.0.0-20260624060244-5561a3c614a3
 
 require (
