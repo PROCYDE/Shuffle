@@ -1,0 +1,32 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: ["local>PROCYDE/renovate-config"],
+  automergeType: "pr",
+  automergeStrategy: "squash",
+  platformAutomerge: true,
+  lockFileMaintenance: {
+    enabled: true,
+  },
+  packageRules: [
+    {
+      description: "Auto-merge patch releases",
+      matchUpdateTypes: [
+        "patch",
+        "pin",
+        "pinDigest",
+        "digest",
+        "lockFileMaintenance",
+      ],
+      matchCurrentVersion: "!/^v?0/",
+      automerge: true,
+    },
+    {
+      groupName: "OpenSearch",
+      matchPackageNames: ["opensearchproject/opensearch"],
+    },
+    {
+      groupName: "shuffle",
+      matchPackageNames: ["**/shuffle/**"],
+    },
+  ],
+}
