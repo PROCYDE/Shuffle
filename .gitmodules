@@ -1,0 +1,6 @@
+[submodule "shuffle-shared"]
+	path = shuffle-shared
+	url = git@github.com:PROCYDE/shuffle-shared.git
+[submodule "orborus"]
+	path = orborus
+	url = git@github.com:PROCYDE/shuffle-orborus.git
