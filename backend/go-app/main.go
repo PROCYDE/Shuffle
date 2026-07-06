@@ -772,16 +772,6 @@ func handleInfo(resp http.ResponseWriter, request *http.Request) {
 	go shuffle.CheckSessionOrgs(ctx, userInfo)
 
 	//log.Printf("%s  %s", session.Session, UserInfo.Session)
-	//if session.Session != userInfo.Session {
-	//	log.Printf("Session %s is not the same as %s for %s. %s", userInfo.Session, session.Session, userInfo.Username, err)
-	//	resp.WriteHeader(401)
-	//	resp.Write([]byte(`{"success": false, "reason": ""}`))
-	//	return
-	//}
-
-	expiration := time.Now().Add(3600 * time.Second)
-	sessionCookie := shuffle.ConstructSessionCookie(userInfo.Session, expiration)
-	http.SetCookie(resp, sessionCookie)
 
 	// Updating user info if there's something wrong
 	if len(userInfo.ActiveOrg.Name) == 0 || len(userInfo.ActiveOrg.Id) == 0 {
@@ -1176,19 +1166,12 @@ func handleInfo(resp http.ResponseWriter, request *http.Request) {
 	aiEnabled := os.Getenv("OPENAI_API_URL") != "" && os.Getenv("AI_MODEL") != ""
 
 	returnValue := shuffle.HandleInfo{
-		Success:   true,
-		Username:  userInfo.Username,
-		Admin:     parsedAdmin,
-		Id:        userInfo.Id,
-		Orgs:      userOrgs,
-		ActiveOrg: userInfo.ActiveOrg,
-		Cookies: []shuffle.SessionCookie{
-			shuffle.SessionCookie{
-				Key:        "session_token",
-				Value:      userInfo.Session,
-				Expiration: expiration.Unix(),
-			},
-		},
+		Success:      true,
+		Username:     userInfo.Username,
+		Admin:        parsedAdmin,
+		Id:           userInfo.Id,
+		Orgs:         userOrgs,
+		ActiveOrg:    userInfo.ActiveOrg,
 		EthInfo:      userInfo.EthInfo,
 		ChatDisabled: chatDisabled,
 		Tutorials:    tutorialsFinished,
