@@ -1244,9 +1244,13 @@ func checkAdminLogin(resp http.ResponseWriter, request *http.Request) {
 		// 	continue
 		// }
 
-		// Should run calculations
+		// Generate a generic SSO URL for the login page. Pass an empty user
+		// because this endpoint is unauthenticated — we don't know who will
+		// complete the SSO flow. Passing an arbitrary user from the DB would
+		// set ExpectedUser in the OIDC transaction, causing the callback to
+		// reject the actual SSO user with a mismatch error.
 		if len(org.SSOConfig.OpenIdAuthorization) > 0 {
-			baseSSOUrl, err = shuffle.GetOpenIdUrl(request, *org, user, "")
+			baseSSOUrl, err = shuffle.GetOpenIdUrl(request, *org, shuffle.User{}, "")
 			if err != nil {
 				log.Printf("[ERROR] Failed getting OpenID URL for org %s: %s", org.Name, err)
 			}
