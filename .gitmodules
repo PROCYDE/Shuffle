@@ -4,3 +4,6 @@
 [submodule "orborus"]
 	path = orborus
 	url = git@github.com:PROCYDE/shuffle-orborus.git
+[submodule "docs"]
+	path = docs
+	url = git@github.com:PROCYDE/shuffle-docs.git
