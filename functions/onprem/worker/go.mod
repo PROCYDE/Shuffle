@@ -5,7 +5,7 @@ go 1.26.0
 //replace github.com/shuffle/shuffle-shared => ../../../../shuffle-shared
 //replace github.com/shuffle/singul => ../../../../singul
 
-replace github.com/shuffle/shuffle-shared => github.com/PROCYDE/shuffle-shared v0.0.0-20260624060244-5561a3c614a3
+replace github.com/shuffle/shuffle-shared => github.com/PROCYDE/shuffle-shared v0.0.0-20260708121659-e63547aaec60
 
 require (
 	github.com/docker/docker v28.5.2+incompatible
