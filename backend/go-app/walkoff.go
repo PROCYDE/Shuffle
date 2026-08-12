@@ -3437,12 +3437,10 @@ func checkUnfinishedExecution(resp http.ResponseWriter, request *http.Request) {
 
 	ctx := shuffle.GetContext(request)
 	exec, err := shuffle.GetWorkflowExecution(ctx, executionId)
-	if err == shuffle.ErrExecutionArchived {
-		log.Printf("[INFO][%s] Rerun requested for an already-archived execution", executionId)
-		resp.WriteHeader(200)
-		resp.Write([]byte(fmt.Sprintf(`{"success": false, "reason": "Execution %s has been archived and can no longer be modified."}`, executionId)))
-		return
-	}
+	// Note: ErrExecutionArchived is only ever returned by SetWorkflowExecution
+	// (a write rejected because the execution moved to the archive), never by
+	// the read path above - the actual archived-write rejection happens later,
+	// inside SetWorkflowQueue's downstream execution processing.
 	if err != nil {
 		log.Printf("[ERROR] Failed getting execution (rerun workflow - 1) %s: %s", executionId, err)
 		resp.WriteHeader(401)
