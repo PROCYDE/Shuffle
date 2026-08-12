@@ -4635,6 +4635,7 @@ func runInitEs(ctx context.Context) {
 	time.Sleep(30 * time.Second)
 
 	shuffle.InitOpensearchIndexes()
+	shuffle.StartExecutionLifecycleJobs(ctx)
 
 	// FIXME: This should ONLY run on one backend instance. This may cause interference.
 	schedules, err := shuffle.GetAllSchedules(ctx, "ALL")
