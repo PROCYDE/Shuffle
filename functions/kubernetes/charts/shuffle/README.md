@@ -231,7 +231,7 @@ environment variables, which you can set via `backend.extraEnvVars` (see the
 | `SHUFFLE_SKIP_EXECUTION_ARCHIVAL_SWEEP` | unset (runs) | Skips only the recurring sweep that moves finished executions from the live index to the archive. Disabling this defeats the point of the hot/cold split (the live index grows unbounded) — only disable if you have your own equivalent process. |
 | `OPENSEARCH_EXECUTION_GRACE_PERIOD` | `1h` | How long a finished execution stays in the live index before it becomes eligible for archival. |
 | `OPENSEARCH_EXECUTION_ARCHIVE_SWEEP_INTERVAL` | `30m` | How often the archival sweep runs. |
-| `OPENSEARCH_INDEX_RETENTION_DAYS` | `{"workflowexecution": 365}` (JSON) | Per-index ISM retention override, e.g. `{"workflowexecution": 180}`. Same mechanism used for `shuffle_logs`. |
+| `OPENSEARCH_INDEX_RETENTION_DAYS` | unset (code default: `workflowexecution` = `365` days) | Per-index ISM retention override, e.g. `{"workflowexecution": 180}`. Same mechanism used for `shuffle_logs`. The 365-day default for `workflowexecution` is a built-in code default (`getOpensearchRetentionDays`), not an env var default — this JSON var only needs to be set to override it. |
 | `OPENSEARCH_NOTIFICATION_RETENTION_DAYS` | `0` (disabled) | Opt-in only: deletes read/ignored notifications older than this many days. Notifications are kept forever unless you explicitly set this. |
 
 `SHUFFLE_SKIP_OPENSEARCH_INDEX_INIT` only affects index/mapping/ISM *infrastructure*
