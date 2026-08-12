@@ -346,6 +346,15 @@ backend:
   ##   - name: FOO
   ##     value: "bar"
   ##
+  ## OpenSearch workflowexecution hot/cold split (index/mapping management is automatic
+  ## and needs no chart changes - see README.md "Index management and the workflowexecution
+  ## hot/cold split" section for all available env vars and defaults):
+  ## extraEnvVars:
+  ##   - name: OPENSEARCH_EXECUTION_GRACE_PERIOD
+  ##     value: "1h"
+  ##   - name: OPENSEARCH_NOTIFICATION_RETENTION_DAYS
+  ##     value: "90"
+  ##
   extraEnvVars: []
   ## @param backend.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for backend containers
   ##
