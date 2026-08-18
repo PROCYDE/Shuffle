@@ -4592,7 +4592,7 @@ func runMCPAction(resp http.ResponseWriter, request *http.Request) {
 			fileId = location[3] // /api/v1/agent or /api/v1/mcp
 		} else {
 			fileId = location[4] // /api/v1/apps/{appid}/mcp
-	
+
 			if location[3] == "apps" {
 				isSingleApp = true
 			}
@@ -4646,12 +4646,12 @@ func runMCPAction(resp http.ResponseWriter, request *http.Request) {
 		templateName = foundRequest.Params.Template
 	}
 
-	if templateName != "agents" && templateName != "agent" && templateName != "mcp" && !isSingleApp { 
+	if templateName != "agents" && templateName != "agent" && templateName != "mcp" && !isSingleApp {
 
 		// Reset body cursor
 		request.Body = ioutil.NopCloser(bytes.NewBuffer(body))
-		if templateName == "workflow-edit" { 
-			shuffle.AgentWorkflowEditor(resp, request) 
+		if templateName == "workflow-edit" {
+			shuffle.AgentWorkflowEditor(resp, request)
 			return
 		} else {
 			log.Printf("[INFO] No agent template with name '%s' found. Continuing with default MCP handler.", templateName)
@@ -5295,7 +5295,8 @@ func runInitEs(ctx context.Context) {
 	log.Printf("[INFO] Waiting 30 seconds during init to make sure the opensearch instance is up and running with security features enabled")
 	time.Sleep(30 * time.Second)
 
-	shuffle.InitOpensearchIndexes()
+	shuffle.InitOpensearchIndices()
+	shuffle.StartExecutionLifecycleJobs(ctx)
 
 	// FIXME: This should ONLY run on one backend instance. This may cause interference.
 	schedules, err := shuffle.GetAllSchedules(ctx, "ALL")
@@ -6750,7 +6751,7 @@ func initHandlers() {
 	// A fallback to look up keys in the Datastore based on category
 	// 1. It checks {category} directly
 	// 2. It checks shuffle-security_{category}
-	// 3. Look into GET and POST /api/v2/{datastore_category}/{key} 
+	// 3. Look into GET and POST /api/v2/{datastore_category}/{key}
 	// 4. Separate function for POST responses
 	r.HandleFunc("/api/v2/{datastore_category}", shuffle.HandleDatastoreGetRedirect).Methods("GET", "OPTIONS")
 	r.HandleFunc("/api/v2/{datastore_category}/{datastore_key}", shuffle.HandleDatastoreGetRedirect).Methods("GET", "OPTIONS")
