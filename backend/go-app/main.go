@@ -5293,7 +5293,8 @@ func runInitEs(ctx context.Context) {
 	log.Printf("[INFO] Waiting 30 seconds during init to make sure the opensearch instance is up and running with security features enabled")
 	time.Sleep(30 * time.Second)
 
-	shuffle.InitOpensearchIndexes()
+	shuffle.InitOpensearchIndices()
+	shuffle.StartExecutionLifecycleJobs(ctx)
 
 	// FIXME: This should ONLY run on one backend instance. This may cause interference.
 	schedules, err := shuffle.GetAllSchedules(ctx, "ALL")
@@ -6849,7 +6850,7 @@ func initHandlers() {
 	// A fallback to look up keys in the Datastore based on category
 	// 1. It checks {category} directly
 	// 2. It checks shuffle-security_{category}
-	// 3. Look into GET and POST /api/v2/{datastore_category}/{key} 
+	// 3. Look into GET and POST /api/v2/{datastore_category}/{key}
 	// 4. Separate function for POST responses
 	r.HandleFunc("/api/v2/{datastore_category}", shuffle.HandleDatastoreGetRedirect).Methods("GET", "OPTIONS")
 	r.HandleFunc("/api/v2/{datastore_category}/{datastore_key}", shuffle.HandleDatastoreGetRedirect).Methods("GET", "OPTIONS")
