@@ -2594,7 +2594,6 @@ func executeSingleAction(resp http.ResponseWriter, request *http.Request) {
 		runValidationAction = true
 	}
 
-
 	delay := 0
 	delayStr, ok := query["delay"]
 	if ok && len(delayStr) > 0 {
@@ -2646,8 +2645,6 @@ func executeSingleAction(resp http.ResponseWriter, request *http.Request) {
 		resp.Write([]byte(fmt.Sprintf(`{"success": true, "execution_id": "%s", "authorization": "%s"}`, workflowExecution.ExecutionId, workflowExecution.Authorization)))
 		return
 	}
-
-
 
 	// So IF an AI Agent is ran after the first node (not startnode), then
 	// for some reason, the rerun here thinks it already has a result, which stops it.
@@ -2856,16 +2853,16 @@ func runMCPAction(resp http.ResponseWriter, request *http.Request) {
 
 		// /api/v1/apps/{appIds or toolIds}/mcp
 		if len(location) == 6 {
-			agentSkill = "" 
-			runType = location[4] 
-			toolIds = location[4] 
+			agentSkill = ""
+			runType = location[4]
+			toolIds = location[4]
 
 		} else if len(location) == 4 {
 			runType = location[3] // /api/v1/agent or /api/v1/mcp
 		} else {
 			runType = location[3] // /api/v1/agent/{skill} or /api/v1/mcp/{skill}
 			agentSkill = location[4]
-	
+
 			if location[3] == "apps" {
 				isSingleApp = true
 			}
@@ -2914,10 +2911,10 @@ func runMCPAction(resp http.ResponseWriter, request *http.Request) {
 		}
 	}
 
-	// Forwarding for predefined agent-skill 
+	// Forwarding for predefined agent-skill
 	if len(foundRequest.Params.Template) > 0 {
 		agentSkill = foundRequest.Params.Template
-	} else if len(agentSkill) > 0 { 
+	} else if len(agentSkill) > 0 {
 		foundRequest.Params.Template = agentSkill
 	}
 
@@ -2930,30 +2927,30 @@ func runMCPAction(resp http.ResponseWriter, request *http.Request) {
 
 	// Handles multiple inputs to map into Params.ToolID
 	// Point being to parse BOTH names and IDs properly
-	if len(toolIds) > 0 { 
+	if len(toolIds) > 0 {
 		parsedToolIds := ""
-		for _, toolId := range strings.Split(toolIds, ",") { 
+		for _, toolId := range strings.Split(toolIds, ",") {
 			trimmedToolId := strings.TrimSpace(toolId)
-			if len(trimmedToolId) == 32 { 
+			if len(trimmedToolId) == 32 {
 				parsedToolIds += trimmedToolId + ","
 			} else {
 				foundRequest.Params.ToolName += "," + trimmedToolId
 			}
 		}
 
-		foundRequest.Params.ToolID += ","+parsedToolIds
+		foundRequest.Params.ToolID += "," + parsedToolIds
 	}
 
 	if len(runType) == 32 {
 		foundId = runType
 	} else if len(foundRequest.Params.ToolID) > 0 {
 		foundId = foundRequest.Params.ToolID
-	} 
+	}
 
 	if strings.HasPrefix(foundRequest.Params.ToolName, "app:") && strings.Count(foundRequest.Params.ToolName, ":") >= 2 {
-		foundId += ","+foundRequest.Params.ToolName
+		foundId += "," + foundRequest.Params.ToolName
 	} else if len(foundRequest.Params.ToolName) == 32 {
-		foundId = ","+foundRequest.Params.ToolName
+		foundId = "," + foundRequest.Params.ToolName
 	} else {
 		splitNames := strings.Split(foundRequest.Params.ToolName, ",")
 
@@ -2980,9 +2977,9 @@ func runMCPAction(resp http.ResponseWriter, request *http.Request) {
 					newName = append(newName, fmt.Sprintf("app:%s:%s", foundApp.ID, strings.ToLower(strings.ReplaceAll(foundApp.Name, " ", "_"))))
 				}
 
-			} 
+			}
 
-			if len(foundApp.ID) == 0 { 
+			if len(foundApp.ID) == 0 {
 				foundApps, err := shuffle.FindWorkflowAppByName(ctx, name)
 				if err != nil || len(foundApps) == 0 {
 					altName := strings.Title(strings.ReplaceAll(strings.ReplaceAll(name, "-", " "), "_", " "))
@@ -3013,7 +3010,7 @@ func runMCPAction(resp http.ResponseWriter, request *http.Request) {
 
 				found := false
 				for _, loopApp := range foundApps {
-					if len(loopApp.Actions) == 0 { 
+					if len(loopApp.Actions) == 0 {
 						continue
 					}
 
@@ -3048,7 +3045,7 @@ func runMCPAction(resp http.ResponseWriter, request *http.Request) {
 						log.Printf("[DEBUG] No app found for name '%s' in mcp agent run. Adding anyway.", name)
 					}
 
-					if !nameAdded { 
+					if !nameAdded {
 						innerName := strings.ToLower(strings.ReplaceAll(name, " ", "_"))
 						for _, loopApp := range foundApps {
 							parsedAppname := strings.ToLower(strings.ReplaceAll(loopApp.Name, " ", "_"))
@@ -3063,8 +3060,8 @@ func runMCPAction(resp http.ResponseWriter, request *http.Request) {
 			}
 		}
 
-		if len(newName) > 0 { 
-			foundId += ","+strings.Join(newName, ",")
+		if len(newName) > 0 {
+			foundId += "," + strings.Join(newName, ",")
 		}
 	}
 
@@ -3082,7 +3079,7 @@ func runMCPAction(resp http.ResponseWriter, request *http.Request) {
 				continue
 			}
 
-			if shuffle.ArrayContains(newFoundId, toolId) { 
+			if shuffle.ArrayContains(newFoundId, toolId) {
 				continue
 			}
 
@@ -3226,22 +3223,22 @@ func runMCPAction(resp http.ResponseWriter, request *http.Request) {
 		}
 	}
 
-	if len(agentSkill) > 0 && agentSkill != "agents" && agentSkill != "agent" && agentSkill != "mcp" && !isSingleApp { 
+	if len(agentSkill) > 0 && agentSkill != "agents" && agentSkill != "agent" && agentSkill != "mcp" && !isSingleApp {
 		log.Printf("[INFO] Adding agent skill %s to action parameters", agentSkill)
 
 		newAction.Parameters = append(newAction.Parameters, shuffle.WorkflowAppActionParameter{
-			Name: "template",
+			Name:  "template",
 			Value: agentSkill,
 		})
 
 		newAction.Parameters = append(newAction.Parameters, shuffle.WorkflowAppActionParameter{
-			Name: "execution_mode",
+			Name:  "execution_mode",
 			Value: "direct",
 		})
 
 		if len(foundRequest.Params.Input.WorkflowId) > 0 {
 			newAction.Parameters = append(newAction.Parameters, shuffle.WorkflowAppActionParameter{
-				Name: "workflow_id",
+				Name:  "workflow_id",
 				Value: foundRequest.Params.Input.WorkflowId,
 			})
 		}
@@ -4965,7 +4962,7 @@ func remoteOrgJobController(org shuffle.Org, body []byte) error {
 	} else {
 		shuffle.SetCache(ctx, appRunsHardLimitCacheKey, appRunsHardLimitBytes, 1800)
 	}
-	
+
 	// Store cloud stats in OnpremStats so the Cloud (Cloud-Sync) stats tab can show them.
 	// Overwrite instead of merging - cloud is the source of truth for its own stats.
 	if responseData.CloudStats != nil && len(responseData.CloudStats.DailyStatistics) > 0 {
@@ -6572,7 +6569,6 @@ func initHandlers() {
 	r.HandleFunc("/api/v1/agent/{id}", runMCPAction).Methods("POST", "OPTIONS")
 	r.HandleFunc("/api/v1/agents/{id}", runMCPAction).Methods("POST", "OPTIONS")
 
-
 	//r.HandleFunc("/api/v1/apps/categories/run", shuffle.RunCategoryAction).Methods("POST", "OPTIONS")
 	r.HandleFunc("/api/v1/singul", singul.RunCategoryAction).Methods("POST", "OPTIONS")
 	r.HandleFunc("/api/v1/apps/upload", handleAppZipUpload).Methods("POST", "OPTIONS")
@@ -6701,13 +6697,13 @@ func initHandlers() {
 	r.HandleFunc("/api/v1/get_openapi/{key}", getOpenapi).Methods("GET", "OPTIONS")
 
 	// Specific triggers
-//	r.HandleFunc("/api/v1/workflows/{key}/outlook", shuffle.HandleCreateOutlookSub).Methods("POST", "OPTIONS")
-//	r.HandleFunc("/api/v1/workflows/{key}/outlook/{triggerId}", shuffle.HandleDeleteOutlookSub).Methods("DELETE", "OPTIONS")
-//	r.HandleFunc("/api/v1/triggers/outlook/register", shuffle.HandleNewOutlookRegister).Methods("GET", "OPTIONS")
-//	r.HandleFunc("/api/v1/triggers/outlook/getFolders", shuffle.HandleGetOutlookFolders).Methods("GET", "OPTIONS")
-//	r.HandleFunc("/api/v1/triggers/outlook/{key}", shuffle.HandleGetSpecificTrigger).Methods("GET", "OPTIONS")
-//	r.HandleFunc("/api/v1/triggers/gmail/register", shuffle.HandleNewGmailRegister).Methods("GET", "OPTIONS")
-//	r.HandleFunc("/api/v1/triggers/gmail/getFolders", shuffle.HandleGetGmailFolders).Methods("GET", "OPTIONS")
+	//	r.HandleFunc("/api/v1/workflows/{key}/outlook", shuffle.HandleCreateOutlookSub).Methods("POST", "OPTIONS")
+	//	r.HandleFunc("/api/v1/workflows/{key}/outlook/{triggerId}", shuffle.HandleDeleteOutlookSub).Methods("DELETE", "OPTIONS")
+	//	r.HandleFunc("/api/v1/triggers/outlook/register", shuffle.HandleNewOutlookRegister).Methods("GET", "OPTIONS")
+	//	r.HandleFunc("/api/v1/triggers/outlook/getFolders", shuffle.HandleGetOutlookFolders).Methods("GET", "OPTIONS")
+	//	r.HandleFunc("/api/v1/triggers/outlook/{key}", shuffle.HandleGetSpecificTrigger).Methods("GET", "OPTIONS")
+	//	r.HandleFunc("/api/v1/triggers/gmail/register", shuffle.HandleNewGmailRegister).Methods("GET", "OPTIONS")
+	//	r.HandleFunc("/api/v1/triggers/gmail/getFolders", shuffle.HandleGetGmailFolders).Methods("GET", "OPTIONS")
 	r.HandleFunc("/api/v1/triggers/pipeline", shuffle.HandleNewPipelineRegister).Methods("POST", "OPTIONS")
 	r.HandleFunc("/api/v1/triggers/github/register", shuffle.HandleNewGithubRegister).Methods("PUT", "OPTIONS")
 	//r.HandleFunc("/api/v1/triggers/pipeline/save", shuffle.HandleSavePipelineInfo).Methods("PUT", "OPTIONS")
@@ -6717,8 +6713,8 @@ func initHandlers() {
 	//r.HandleFunc("/api/v1/triggers/gmail/routing", handleGmailRouting).Methods("POST", "OPTIONS")
 
 	r.HandleFunc("/api/v1/triggers/gmail/{key}", shuffle.HandleGetSpecificTrigger).Methods("GET", "OPTIONS")
-//	r.HandleFunc("/api/v1/workflows/{key}/gmail", shuffle.HandleCreateGmailSub).Methods("POST", "OPTIONS")
-//	r.HandleFunc("/api/v1/workflows/{key}/gmail/{triggerId}", shuffle.HandleDeleteGmailSub).Methods("DELETE", "OPTIONS")
+	//	r.HandleFunc("/api/v1/workflows/{key}/gmail", shuffle.HandleCreateGmailSub).Methods("POST", "OPTIONS")
+	//	r.HandleFunc("/api/v1/workflows/{key}/gmail/{triggerId}", shuffle.HandleDeleteGmailSub).Methods("DELETE", "OPTIONS")
 
 	//r.HandleFunc("/api/v1/triggers/gmail/{key}", handleGetSpecificGmailTrigger).Methods("GET", "OPTIONS")
 	//r.HandleFunc("/api/v1/triggers/outlook/getFolders", shuffle.HandleGetOutlookFolders).Methods("GET", "OPTIONS")
