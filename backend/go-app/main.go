@@ -4650,12 +4650,10 @@ func runMCPAction(resp http.ResponseWriter, request *http.Request) {
 
 		// Reset body cursor
 		request.Body = ioutil.NopCloser(bytes.NewBuffer(body))
-		if templateName == "workflow-edit" {
-			shuffle.AgentWorkflowEditor(resp, request)
-			return
-		} else {
-			log.Printf("[INFO] No agent template with name '%s' found. Continuing with default MCP handler.", templateName)
-		}
+		// shuffle.AgentWorkflowEditor was removed upstream (shuffle-shared commit 2eba3a26)
+		// in favor of routing "workflow-edit" through the generic template handling in
+		// HandleAiAgentExecutionStart/getTemplateContext. Fall through to the default handler.
+		log.Printf("[INFO] No agent template with name '%s' found. Continuing with default MCP handler.", templateName)
 	}
 
 	if foundRequest.Jsonrpc == "" {
