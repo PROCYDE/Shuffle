@@ -30,6 +30,7 @@ Chart.lock
 
 # Built go binaries
 shuffle
+functions/onprem/worker/worker
 
 # Devenv
 .devenv*
