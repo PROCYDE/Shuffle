@@ -631,13 +631,6 @@ const LoginPage = props => {
 					}
 
 					setLoginInfo("Successful login! Redirecting you in 3 seconds...")
-<<<<<<< HEAD
-					toast.success("Successful login! Redirecting you in 3 seconds...")
-					for (var key in responseJson["cookies"]) {
-						setCookie(responseJson["cookies"][key].key, responseJson["cookies"][key].value, { path: "/" })
-					}
-=======
->>>>>>> 519f5c3f9 (do not store cookies in client-side javascript and allow to configure session lifetime)
 
 					setTimeout(() => {
 						const tmpView = new URLSearchParams(window.location.search).get("view");
