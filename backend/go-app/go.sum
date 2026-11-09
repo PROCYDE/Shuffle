@@ -49,8 +49,8 @@ github.com/MicahParks/keyfunc v1.9.0/go.mod h1:IdnCilugA0O/99dW+/MkvlyrsX8+L8+x9
 github.com/Microsoft/go-winio v0.5.2/go.mod h1:WpS1mjBmmwHBEWmogvA2mj8546UReBk4v8QkMxJ6pZY=
 github.com/Microsoft/go-winio v0.6.2 h1:F2VQgta7ecxGYO8k3ZZz3RS8fVIXVxONVUPlNERoyfY=
 github.com/Microsoft/go-winio v0.6.2/go.mod h1:yd8OoFMLzJbo9gZq8j5qaps8bJ9aShtEA8Ipt1oGCvU=
-github.com/PROCYDE/shuffle-shared v0.0.0-20261002105134-ffdeda35329e h1:LJt3ooM5rmiKeOqRnexTEBi39/NbVDW5ClM4aOe2luU=
-github.com/PROCYDE/shuffle-shared v0.0.0-20261002105134-ffdeda35329e/go.mod h1:0vOWNn+aXibNcbjROmrgszm3/KirYtwzE5BuVnCzQVE=
+github.com/PROCYDE/shuffle-shared v0.0.0-20261109095630-df3c70ede56a h1:3TlYHGbb6jeQnbVWRcaZCuQ9fn42TY1zu+xPX9KY1W0=
+github.com/PROCYDE/shuffle-shared v0.0.0-20261109095630-df3c70ede56a/go.mod h1:T8cott2fWYgwxCOS74T+yHEbJVh479ZeyoF6DmMk1xo=
 github.com/ProtonMail/go-crypto v1.1.6 h1:ZcV+Ropw6Qn0AX9brlQLAUXfqLBc7Bl+f/DmNxpLfdw=
 github.com/ProtonMail/go-crypto v1.1.6/go.mod h1:rA3QumHc/FZ8pAHreoekgiAbzpNsfQAosU5td4SnOrE=
 github.com/adrg/strutil v0.3.1 h1:OLvSS7CSJO8lBii4YmBt8jiK9QOtB9CzCzwl4Ic/Fz4=

@@ -2,7 +2,7 @@ module shuffle
 
 go 1.25.0
 
-replace github.com/shuffle/shuffle-shared => github.com/PROCYDE/shuffle-shared v0.0.0-20261002105134-ffdeda35329e
+replace github.com/shuffle/shuffle-shared => github.com/PROCYDE/shuffle-shared v0.0.0-20261109095630-df3c70ede56a
 
 require (
 	cloud.google.com/go/datastore v1.26.0
