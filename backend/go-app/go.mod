@@ -2,7 +2,7 @@ module shuffle
 
 go 1.26.0
 
-replace github.com/shuffle/shuffle-shared => github.com/PROCYDE/shuffle-shared v0.0.0-20261109140334-6a56e712d2c7
+replace github.com/shuffle/shuffle-shared => github.com/PROCYDE/shuffle-shared v0.0.0-20261110083223-508da16b0e11
 
 require (
 	cloud.google.com/go/datastore v1.26.0
@@ -23,7 +23,7 @@ require (
 	github.com/shuffle/opensearch-go/v4 v4.0.0
 	github.com/shuffle/shuffle-shared v1.3.39-memcache
 	github.com/shuffle/singul v0.0.36
-	golang.org/x/crypto v0.58.0
+	golang.org/x/crypto v0.58.1-0.20261016151342-0ae6809b7559
 	gopkg.in/yaml.v3 v3.0.1
 	k8s.io/api v0.34.2
 	k8s.io/apimachinery v0.34.2
@@ -171,6 +171,7 @@ require (
 	go.yaml.in/yaml/v2 v2.4.2 // indirect
 	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	go4.org v0.0.0-20260112195520-a5071408f32f // indirect
+	golang.org/x/crypto/openpgp v0.1.0-deprecated // indirect
 	golang.org/x/net v0.62.0 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect
 	golang.org/x/sync v0.24.0 // indirect
